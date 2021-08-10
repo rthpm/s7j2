@@ -1,0 +1,54 @@
+<div class="grid-x grid-margin-x callout">
+        <div class="cell small-4">
+            <img src="https://picsum.photos/500/500?random=<%= @event.id %>">
+        </div>
+          <div class="cell auto">
+            <p class="h5"><%= @event.title %></p>
+            <blockquote><%= @event.description %></blockquote>
+
+          <dl>
+            <div class="grid-x">
+              <dt class="cell small-2">Location</dt>
+              <dd class="cell auto"><%= @event.location %></dd>
+            </div>
+
+            <div class="grid-x">
+              <dt class="cell small-2">Price</dt>
+              <dd class="cell auto">€$<%= @event.price %></dd>
+            </div>
+
+            <div class="grid-x">
+              <dt class="cell small-2">Attendees</dt>
+              <dd class="cell auto"><%= @event.attendances.count %></dd>
+            </div>
+
+            <div class="grid-x">
+              <dt class="cell small-2">Event date</dt>
+              <dd class="cell auto"><%= @event.start_date.to_time.strftime('%Y-%m-%d %H:%M') %></dd>
+            </div>
+
+            <div class="grid-x">
+              <dt class="cell small-2">End date</dt>
+              <dd class="cell auto"><%= @end_date.to_time.strftime('%Y-%m-%d %H:%M') %> (<%= distance_of_time_in_words(0, @event.duration.minutes) %>)</dd>
+            </div>
+
+            <div class="grid-x">
+              <dt class="cell small-2">Organizer</dt>
+              <dd class="cell auto"><%= mail_to @event.user.email, @event.user.email %></dd>
+            </div>
+
+            <div class="grid-x">
+              <dt class="cell small-2">Created</dt>
+              <dd><%= time_ago_in_words(@event.created_at) %> ago</dd>
+          </div>
+
+          <% if @event.updated_at > @event.created_at %>
+            <div class="grid-x">
+              <dt class="cell small-2">Last update</dt>
+              <dd class="cell auto"><%= time_ago_in_words(@event.updated_at) %></dd>
+          </div>
+          <% end %>
+          </dl>
+
+        </div>
+      </div>

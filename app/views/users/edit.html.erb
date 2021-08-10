@@ -1,0 +1,21 @@
+<div class="cell">
+    <%= render "devise/shared/error_messages", resource: resource %>
+
+    <%= form_tag url_for(action: 'create'), method: "POST" do %>
+
+    <fieldset class="fieldset"><legend>Biographical informations</legend>
+      <%= label_tag nil do %><%= label_tag :first_name %>
+      <%= text_field_tag :first_name, autofocus: true, autocomplete: "first_name" %>
+      <% end %>
+
+      <%= label_tag nil do %><%= label_tag :last_name %>
+      <%= text_field_tag :last_name, autocomplete: "last_name" %>
+      <% end %>
+
+      <%= label_tag nil do %><%= label_tag :description %>
+        <%= text_area_tag :description, :rows => "5", autocomplete: "description" %>
+      <% end %>
+
+      <%= submit_tag "Update", :class => "button" %>
+    </fieldset>
+  <% end %>

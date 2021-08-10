@@ -1,0 +1,34 @@
+  <div class="callout primary large panel">
+    <h1>A new way to braille together</h1>
+    <p class="h4">Let’s meet and greet each other like we used to!</p>
+  </div>
+<h2>Latest Events</h2>
+
+<div class="grid-container">
+  <div class="grid-x grid-margin-x small-up-2 medium-up-3">
+  <% @all_events.order("start_date").each do |event| %>
+      <div class="cell">
+        <div class="card">
+          <%= link_to event_path(event.id), :action => 'go' do %>
+            <img src="https://picsum.photos/500/500?random=<%= event.id %>">
+          <% end %>
+          <div class="card-section">
+            <p class="h5"><%= event.title %></p>
+            <p><% if event.start_date.between?(Time.now, Time.now + 1.week) %>
+              In <%= distance_of_time_in_words(Time.now, event.start_date) %>
+            <% else %>
+              <%= event.start_date.to_time.strftime('%Y-%m-%d %H:%M') %>
+            <% end %><br />
+            Duration: <%= distance_of_time_in_words(0, event.duration.minutes) %></p>
+            <p><%= event.description.truncate(100) %></p>
+            <p><small class="secondary">Created <%= time_ago_in_words(event.created_at) %> ago
+              <% if event.updated_at > event.created_at %> · updated <%= time_ago_in_words(event.updated_at) %> <% end %>
+              · <%= event.attendances.count %> interested
+            </small></p>
+          </div>
+        </div>
+      </div>
+  <% end %>
+  </div>
+</div>
+

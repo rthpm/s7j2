@@ -1,0 +1,47 @@
+
+<div class="cell small-6">
+    <%= render "devise/shared/error_messages", resource: resource %>
+  
+    
+  <fieldset class="fieldset"><legend class="alert">Edit account informations</legend>
+  <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
+    <fieldset class="fieldset"><legend>Account informations</legend>
+      <%= f.label nil do %><%= f.label :email %>
+      <%= f.email_field :email, autocomplete: "email" %>
+      <% end %>
+  
+    <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
+      Currently waiting confirmation for: <%= resource.unconfirmed_email %>
+    <% end %>
+  
+      <%= f.label nil do %><%= f.label :new_password %>
+        <span class="help-text" id="passwordHelpText">(leave blank if you don't want to change it)</span>
+      <%= f.password_field :password, autocomplete: "new-password" %>
+      <% end %>
+
+    <% if @minimum_password_length %>
+        <p class="help-text" id="passwordHelpText">Your password must have at least <%= @minimum_password_length %> characters minimum.</p>
+    <% end %>
+  
+      <%= f.label nil do %><%= f.label :new_password_confirmation %>
+      <%= f.password_field :password_confirmation, autocomplete: "new-password" %>
+      <% end %>
+  
+      <%= f.label nil do %><%= f.label :current_password %>
+        <span class="help-text" id="passwordHelpText">(we need your current password to validates your changes)</span>
+      <%= f.password_field :current_password, autocomplete: "current-password" %>
+      <% end %>
+  
+      <%= f.submit "Update", :class => "button" %>
+  <% end %>
+    </fieldset>
+</div>
+  </fieldset>
+
+
+<div class="cell">
+  <fieldset class="fieldset"><legend class="alert">Danger zone</legend>
+    <p>Unhappy about EventeBraille?</p>
+    <%= button_to "Cancel my account", registration_path(resource_name), data: { confirm: "Are you sure?" }, method: :delete, :class => "button alert" %>
+  </fieldset>
+</div>

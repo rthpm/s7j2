@@ -1,0 +1,42 @@
+
+<div class="cell">
+    <fieldset class="fieldset"><legend>Your informations</legend>
+        <dl>
+          <% if !@user.first_name.nil? %>
+            <div class="grid-x">
+              <dt class="cell small-2">First name</dt>
+              <dd class="cell auto"><%= @user.first_name %></dd>
+            </div>
+          <% end %>
+
+          <% if !@user.last_name.nil? %>
+            <div class="grid-x">
+              <dt class="cell small-2">Last name</dt>
+              <dd class="cell auto"><%= @user.last_name %></dd>
+            </div>
+          <% end %>
+
+          <div class="grid-x">
+            <dt class="cell small-2">Email</dt>
+            <dd class="cell auto"><%= @user.email %></dd>
+          </div>
+
+          <% if !@user.description.nil? %>
+            <div class="grid-x">
+              <dt class="cell">Biography</dt>
+              <dd class="cell"><blockquote><%= @user.description %></blockquote></dd>
+            </div>
+          <% end %>
+        </dl>
+      <% if current_user == @user %>
+        <%= link_to "Edit profile", edit_user_registration_path, :class => "hollow button" %> 
+      <% end %>
+    </fieldset>
+    <fieldset class="fieldset"><legend>Events you manage</legend>
+      <ul class="no-bullet">
+      <% @all_events.order("updated_at","created_at").reverse.each do |event| %>
+        <li><%= link_to event.title, event_path(event.id) %></li> 
+      <% end %>
+      </ul>
+    </fieldset>
+</div>

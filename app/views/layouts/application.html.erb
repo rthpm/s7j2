@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title><%= content_for?(:title) ? yield(:title) : "EventeBraille" %></title>
+
+    <%= stylesheet_link_tag    "application" %>
+    <%= javascript_include_tag "application" %>
+    <%= csrf_meta_tags %>
+  </head>
+
+  <body>
+
+<div class="top-bar">
+  <div class="top-bar-left">
+    <ul class="dropdown menu" data-dropdown-menu>
+      <li class="menu-text"><%= link_to "EventeBraille", root_path %></li>
+      <% if user_signed_in? %>
+        <li><%= link_to "Create event", new_event_path %></li>
+
+      <% end %>
+    </ul>
+  </div>
+  <div class ="top-bar-right">
+    <ul class="dropdown menu" data-dropdown-menu>
+      <% if user_signed_in? %>
+        <li><%= link_to "My profile", user_path(current_user) %></li>
+        <li><%= link_to "Sign out", destroy_user_session_path, :method => :delete %></li>
+      <% else %>
+        <li><%= link_to "Signin", new_user_session_path %></li>
+        <li><%= link_to "Sign up", new_user_registration_path %></li>
+      <% end %>
+    </ul>
+  </div>
+</div>
+
+    <section id="main">
+
+      <%= yield %>
+
+    </section>
+  </body>
+</html>
