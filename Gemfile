@@ -36,6 +36,7 @@ gem 'autoprefixer-rails'
 gem 'devise'
 gem 'dotenv-rails'
 gem 'foundation-rails'
+gem 'pg', '>= 0.18'
 
 group :development, :test do
   gem 'better_errors'
@@ -45,11 +46,6 @@ group :development, :test do
   gem 'faker'
   gem 'letter_opener'
   gem 'rubocop'
-  gem 'sqlite3'
-end
-
-group :production do
-  gem 'pg', '>= 0.18'
 end
 
 group :development do
